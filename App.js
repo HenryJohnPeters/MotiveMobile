@@ -167,12 +167,11 @@ const Map = () => {
 
   return (
     <View style={styles.page}>
-
       <View style={styles.centeredView}>
         {/* //map */}
         <View style={styles.container}>
           <MapboxGL.MapView style={styles.map} children={true}>
-
+            {/*
             <MapboxGL.UserLocation
               renderMode="native"
               androidRenderMode="compass"
@@ -189,15 +188,13 @@ const Map = () => {
               id="exampleShapeSource"
               shape={featureCollection}>
               <MapboxGL.SymbolLayer id="exampleIconName" style={styles.icon} />
-            </MapboxGL.ShapeSource>
-
+            </MapboxGL.ShapeSource> */}
 
             {/* {markers.map((marker) => (
               <MarkerView coordinate={marker.coordinates} key={key} onPress={() => console.log("pressed")}>
 
               </MarkerView>
             ))} */}
-
 
 
           </MapboxGL.MapView>
