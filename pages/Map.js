@@ -1,19 +1,12 @@
 
 import React, { useState } from "react";
 import { View, Text, Alert, Modal, Pressable, StyleSheet } from 'react-native';
-import MapComponent from '../components/Map'
-
-
-
+import MapComponent from '../components/Map/Map'
 
 
 const MapPage = () => {
     const [modalEventsVisible, setModalEventsVisible] = useState(false);
     const [modalFiltersVisible, setModalFiltersVisible] = useState(false);
-
-
-
-
 
     return (
         <View style={styles.page}>
