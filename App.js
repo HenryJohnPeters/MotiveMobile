@@ -59,15 +59,29 @@ const MyStack = () => {
       </NavigationContainer>
       :
       <NavigationContainer>
-        <Stack.Navigator>
+        <Stack.Navigator
+          screenOptions={{
+            headerShown: false
+          }}
+          tabBarOptions={{
+            activeTintColor: 'black',
+            inactiveTintColor: 'black',
+            activeBackgroundColor: 'lightgray',
+            inactiveBackgroundColor: 'lightgray',
+            style: {
+              backgroundColor: '#CE4418',
+              paddingBottom: 3
+            }
+          }} >
           <Stack.Screen
+
             name="Home"
             component={Map}
 
           />
           <Stack.Screen name="Events" component={MyEventsPage} />
         </Stack.Navigator>
-      </NavigationContainer>
+      </NavigationContainer >
     // <LoginPage />
 
   );
