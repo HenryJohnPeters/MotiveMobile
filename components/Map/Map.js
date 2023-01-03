@@ -1,105 +1,65 @@
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, Alert, Modal, Pressable, StyleSheet } from 'react-native';
 import MapboxGL from '@rnmapbox/maps';
 MapboxGL.setWellKnownTileServer('Mapbox');
+
+// TODO: set as env var
 MapboxGL.setAccessToken("pk.eyJ1IjoibWFwbWFrZXIxMjM0IiwiYSI6ImNsOWJlbjJqajFqbTQzcmxtaW1mazNmYjAifQ.THEHjlqYUV3nVSJzSCA-Jw");
 
-
-const featureCollection = {
-    type: 'FeatureCollection',
-    features: [
-        {
-            type: 'Feature',
-            id: '9d10456e-bdda-4aa9-9269-04c1667d4552',
-            properties: {
-                icon: 'example',
-            },
-            geometry: {
-                type: 'Point',
-                coordinates: [-117.20611157485, 52.180961084261],
-            },
-        },
-        {
-            type: 'Feature',
-            id: '9d10456e-bdda-4aa9-9269-04c1667d4552',
-            properties: {
-                icon: 'airport-15',
-            },
-            geometry: {
-                type: 'Point',
-                coordinates: [-117.205908, 52.180843],
-            },
-        },
-        {
-            type: 'Feature',
-            id: '9d10456e-bdda-4aa9-9269-04c1667d4552',
-            properties: {
-                icon: 'pin',
-            },
-            geometry: {
-                type: 'Point',
-                coordinates: [-117.206562, 52.180797],
-            },
-        },
-        {
-            type: 'Feature',
-            id: '9d10456e-bdda-4aa9-9269-04c1667d4553',
-            properties: {
-                icon: 'pin3',
-            },
-            geometry: {
-                type: 'Point',
-                coordinates: [-117.206862, 52.180897],
-            },
-        },
-    ],
-};
-
-
 const Map = () => {
-    const [markers] = useState([
-        {
-            title: 'hello',
-            coordinates: [105.24065199465605, 16.049580619790696]
-        },
-        {
-            title: 'hello',
-            coordinates: [99.24177161264663, 16.051053734988322]
-        },
-        {
-            title: 'hello',
-            coordinates: [60.23945068795894, 16.05118303611558]
-        },
-        {
-            title: 'hello',
-            coordinates: [20.24056069541828, 16.05149705278938]
-        },
-        {
-            title: 'hello',
-            coordinates: [55.24175239173825, 16.051012173893877]
-        },
-        {
-            title: 'hello',
-            coordinates: [88.24081537245439, 16.050171714344984]
-        }
-    ]);
+
+    const [markers, setMarkers] = useState([]);
+    const [userLocation, setUserLocation] = useState(null)
+
+    const GetMarkers = (userLocation) => {
+        // Todo: Need to fetch these from api using userLocation
+        console.log("Getting Markers:")
+        setMarkers([
+            {
+                title: 'hello',
+                coordinates: [105.24065199465605, 16.049580619790696]
+            },
+            {
+                title: 'hello',
+                coordinates: [-0.11292, 51.609865]
+            },
+            {
+                title: 'hello',
+                coordinates: [-0.828192, 51.551865]
+            },
+            {
+                title: 'hello',
+                coordinates: [-1.114092, 51.655865]
+            },
+            {
+                title: 'hello',
+                coordinates: [-0.618092, 51.609865]
+            },
+            {
+                title: 'hello',
+                coordinates: [-0.418092, 51.509865]
+            }
+        ])
+    }
+    const GetUserLocation = () => {
+        {/* TODO: Need to get center coordinate dynamically */ }
+        setUserLocation([-0.118092, 51.509865]);
+    }
+
+    useEffect(() => {
+        GetUserLocation();
+        GetMarkers(userLocation);
+    }, []);
 
     return (
         <View style={styles.page}>
             <View style={styles.centeredView}>
-                {/* //map */}
                 <View style={styles.container}>
-                    <MapboxGL.MapView style={styles.map} children={true}>
-                        <MapboxGL.ShapeSource
-                            id="exampleShapeSource"
-                            shape={featureCollection}>
-                            <MapboxGL.SymbolLayer id="exampleIconName" style={styles.icon} />
-                        </MapboxGL.ShapeSource>
-                        <MapboxGL.UserLocation
-                            renderMode="native"
-                            androidRenderMode="compass"
-                        />
+                    <MapboxGL.MapView style={styles.map} zoomEnabled={true} children={true}>
+                        {/* TODO: Need to get center coordinate dynamically */}
+                        <MapboxGL.Camera zoomLevel={8} centerCoordinate={userLocation} >
+                        </ MapboxGL.Camera >
                         {markers.map((marker) => (
                             <MapboxGL.PointAnnotation coordinate={marker.coordinates} key={marker.coordinates} >
                             </MapboxGL.PointAnnotation >
@@ -107,11 +67,11 @@ const Map = () => {
                     </MapboxGL.MapView>
                 </View>
             </View>
-        </View>
+        </View >
     );
 }
 
-
+// TODO: Clean up style some are not needed
 const styles = StyleSheet.create({
     page: {
         flex: 1,
@@ -123,7 +83,6 @@ const styles = StyleSheet.create({
         width: 500,
     },
     map: {
-        // position: 'absolute',
         flex: 1
     },
     centeredView: {
@@ -146,6 +105,21 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.25,
         shadowRadius: 4,
         elevation: 5
+    },
+    circle: {
+        circleRadius: [
+            'interpolate',
+            ['linear'],
+            ['zoom'],
+            15, ['*', ['get', 'geoAccuracy'], 1.5],
+            16, ['*', ['get', 'geoAccuracy'], 2],
+            17, ['*', ['get', 'geoAccuracy'], 3],
+            18, ['*', ['get', 'geoAccuracy'], 5],
+            19, ['*', ['get', 'geoAccuracy'], 10],
+            20, ['*', ['get', 'geoAccuracy'], 15],
+            21, ['*', ['get', 'geoAccuracy'], 30],
+            22, ['*', ['get', 'geoAccuracy'], 55],
+        ]
     },
     button: {
         top: 0,

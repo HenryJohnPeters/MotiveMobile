@@ -1071,6 +1071,11 @@
   resolved "https://registry.yarnpkg.com/@mapbox/sphericalmercator/-/sphericalmercator-1.2.0.tgz#55d4896be906bfff859e22a1d72267329a0fff90"
   integrity sha512-ZTOuuwGuMOJN+HEmG/68bSEw15HHaMWmQ5gdTsWdWsjDe56K1kGvLOK6bOSC8gWgIvEO0w6un/2Gvv1q5hJSkQ==
 
+"@miblanchard/react-native-slider@^2.2.0":
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/@miblanchard/react-native-slider/-/react-native-slider-2.2.0.tgz#5d03cf49516ad0a3b4011fbcad53cb379800832b"
+  integrity sha512-LepVGFVy6KtDVgMRIAAJJKQCXbcADkzK2R61t3LkD+IF2wG1J4I4KVo99GAsvU0EBKeCsjHPkR+6LGnB6xGzVA==
+
 "@react-native-community/cli-clean@^9.1.0":
   version "9.2.1"
   resolved "https://registry.yarnpkg.com/@react-native-community/cli-clean/-/cli-clean-9.2.1.tgz#198c5dd39c432efb5374582073065ff75d67d018"

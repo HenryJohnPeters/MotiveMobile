@@ -66,8 +66,8 @@ const MyStack = () => {
           tabBarOptions={{
             activeTintColor: 'black',
             inactiveTintColor: 'black',
-            activeBackgroundColor: 'lightgray',
-            inactiveBackgroundColor: 'lightgray',
+            activeBackgroundColor: 'white',
+            inactiveBackgroundColor: 'white',
             style: {
               backgroundColor: '#CE4418',
               paddingBottom: 3

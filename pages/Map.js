@@ -1,19 +1,54 @@
 
-import React, { useState } from "react";
-import { View, Text, Alert, Modal, Pressable, StyleSheet } from 'react-native';
+import React, { useState, useEffect } from "react";
+import { View, Text, Alert, Modal, Pressable, StyleSheet, Dimensions } from 'react-native';
 import MapComponent from '../components/Map/Map'
-
+import { Slider } from '@miblanchard/react-native-slider';
 
 const MapPage = () => {
     const [modalEventsVisible, setModalEventsVisible] = useState(false);
     const [modalFiltersVisible, setModalFiltersVisible] = useState(false);
 
+    const [dateRange, setDateRange] = useState(1);
+
+    const [deviceWidth, setDeviceWidth] = useState(null);
+
+    const SetDateRange = (val) => {
+        console.log(val)
+        setDateRange(Math.round(val))
+    }
+
+
+    // Similar to componentDidMount and componentDidUpdate:
+    useEffect(() => {
+        const currentWidth = Dimensions.get("screen").width;
+        setDeviceWidth(currentWidth);
+    }, []);
+
+
+
+
     return (
         <View style={styles.page}>
+            <View style={{ width: deviceWidth, ...sliderStyles.container }}>
+                <Slider
+                    maximumValue={28}
+                    value={dateRange}
+                    onValueChange={value => SetDateRange(value)}
+                />
+                <Text style={{ fontSize: 18, color: 'black', fontWeight: 'bold' }}>Within {dateRange} {dateRange > 1 ? " Days" : "Day"}</Text>
+            </View>
             <View style={styles.centeredView}>
+
+
+
+
+
                 <MapComponent />
 
-                {/*Event Modal Btn */}
+
+
+
+                {/*Event Modal*/}
                 <Modal
                     animationType="slide"
                     transparent={true}
@@ -26,6 +61,10 @@ const MapPage = () => {
                     <View style={styles.centeredView}>
                         <View style={styles.modalView}>
                             <Text style={styles.modalText}>Create Event</Text>
+                            <Text style={styles.modalText}>Creatfwfd dfw  fw  dfwwffwfwfwe Event</Text>
+
+
+
                             <Pressable
                                 style={[styles.buttonClose]}
                                 onPress={() => setModalEventsVisible(!modalEventsVisible)}
@@ -36,7 +75,7 @@ const MapPage = () => {
                     </View>
                 </Modal>
 
-                {/*Filter Modal Btn */}
+                {/*Filter Modal */}
                 <Modal
                     animationType="slide"
                     transparent={true}
@@ -48,13 +87,64 @@ const MapPage = () => {
                 >
                     <View style={styles.centeredView}>
                         <View style={styles.modalView}>
-                            <Text style={styles.modalText}>Set Filters</Text>
                             <Pressable
                                 style={[styles.buttonClose]}
                                 onPress={() => setModalFiltersVisible(!modalFiltersVisible)}
                             >
-                                <Text style={styles.textStyle}>Set Filters</Text>
+                                <Text style={styles.modalOptionTextStyle}>X</Text>
                             </Pressable>
+                            <Text style={styles.modalText}>Set Filters</Text>
+
+
+
+
+
+                            <Text>Social</Text>
+                            <Pressable
+                                style={[styles.modalOption]}
+                                onPress={() => setModalEventsVisible(!modalEventsVisible)}
+                            >
+                                <Text style={styles.textStyle}>Hide</Text>
+                            </Pressable>
+
+                            <Text>Entertaiment</Text>
+                            <Pressable
+                                style={[styles.modalOption]}
+                                onPress={() => setModalEventsVisible(!modalEventsVisible)}
+                            >
+                                <Text style={styles.textStyle}>Show</Text>
+                            </Pressable>
+
+
+                            <Text>Sports</Text>
+                            <Pressable
+                                style={[styles.modalOption]}
+                                onPress={() => setModalEventsVisible(!modalEventsVisible)}
+                            >
+                                <Text style={styles.textStyle}>Hide</Text>
+                            </Pressable>
+
+                            <Text>Show User Generated</Text>
+                            <Pressable
+                                style={[styles.modalOption]}
+                                onPress={() => setModalEventsVisible(!modalEventsVisible)}
+                            >
+                                <Text style={styles.textStyle}>Hide</Text>
+                            </Pressable>
+
+                            <Text>Show User Generated</Text>
+                            <Pressable
+                                style={[styles.modalOption]}
+                                onPress={() => setModalEventsVisible(!modalEventsVisible)}
+                            >
+                                <Text style={styles.textStyle}>Hide</Text>
+                            </Pressable>
+
+
+
+
+
+
                         </View>
                     </View>
                 </Modal>
@@ -64,7 +154,7 @@ const MapPage = () => {
                     style={[styles.button, styles.buttonOpen]}
                     onPress={() => setModalEventsVisible(true)}
                 >
-                    <Text style={styles.textStyle}>Events</Text>
+                    <Text style={styles.textStyle}>Create Event +</Text>
                 </Pressable>
 
                 {/* Event Btn */}
@@ -115,17 +205,21 @@ const styles = StyleSheet.create({
         shadowRadius: 4,
         elevation: 5
     },
+
     button: {
-        top: 0,
+        color: '#00FFFF',
+
         right: 60,
+        bottom: 10,
         borderRadius: 20,
         padding: 10,
         elevation: 2,
         position: 'absolute'
 
     },
+    // TODO: get top property dynamically or might be weird on some phones
     button1: {
-        top: 50,
+        top: 80,
         right: 60,
         borderRadius: 20,
         padding: 10,
@@ -139,6 +233,21 @@ const styles = StyleSheet.create({
     buttonClose: {
         backgroundColor: "#2196F3",
     },
+
+
+    modalOption: {
+
+
+        backgroundColor: "#2196F3",
+        borderRadius: 10,
+        padding: 10,
+        margin: 10,
+    },
+    modalOptionTextStyle: {
+        color: "white",
+        fontWeight: "bold",
+        textAlign: "center"
+    },
     textStyle: {
         color: "white",
         fontWeight: "bold",
@@ -150,6 +259,40 @@ const styles = StyleSheet.create({
     },
 
 
+});
+
+
+
+
+class SliderExample extends React.Component {
+    state = {
+        value: 0.2,
+    };
+
+    render() {
+        return (
+            <View style={sliderStyles.container}>
+                <Slider
+                    value={this.state.value}
+                    onValueChange={value => this.setState({ value })}
+                />
+                <Text>Value: {this.state.value}</Text>
+            </View>
+        );
+    }
+}
+
+const sliderStyles = StyleSheet.create({
+    container: {
+        backgroundColor: "white",
+        position: "absolute",
+        zIndex: 10000,
+        // maxWidth: '80%',   // <-- Max width is 80%
+        // minHeight: '80%',
+        top: 0,
+        margin: 1,
+        padding: 10
+    },
 });
 
 export default MapPage;
