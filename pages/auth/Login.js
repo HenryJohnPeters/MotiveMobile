@@ -21,11 +21,11 @@ export default SectionListBasics = ({ navigation }) => {
             />
             <View style={styles.container}>
                 <TextInput style={styles.inputBox} onChangeText underlineColorAndroid='rgba(0,0,0,0)' placeholder="User ID"
-                    placeholderTextColor="#850c22" selectionColor="#fff" keyboardType="email-address"
+                    placeholderTextColor="black" selectionColor="#fff" keyboardType="email-address"
                     onSubmitEditing={() => this.password.focus()} />
                 <TextInput style={styles.inputBox} onChangeText underlineColorAndroid='rgba(0,0,0,0)' placeholder="Enter Password"
                     secureTextEntry={true}
-                    placeholderTextColor="#850c22" ref={(input) => this.password = input}
+                    placeholderTextColor="black" ref={(input) => this.password = input}
                 />
                 <TouchableOpacity style={styles.button}>
                     <Text style={styles.buttonText} onPress={this.saveData}>Login</Text>
@@ -50,15 +50,15 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
     inputBox: {
-        width: 299, backgroundColor: '#ede8e8', borderRadius: 24,
+        width: 299, backgroundColor: 'white', borderRadius: 24,
         paddingHorizontal: 15,
         fontSize: 15,
-        color: '#991172',
+        color: 'black',
         marginVertical: 9
     },
     button: {
         width: 299,
-        backgroundColor: '#00FFFF', borderRadius: 24,
+        backgroundColor: 'white', borderRadius: 24,
         marginVertical: 9,
         paddingVertical: 11
     },
@@ -81,10 +81,10 @@ const styles1 = StyleSheet.create({
     },
     signupText: {
 
-        color: '#00FFFF', fontSize: 15,
+        color: 'white', fontSize: 15,
     },
     signupButton: {
-        color: '#700d49', fontSize: 15,
+        color: 'white', fontSize: 15,
         fontWeight: '500',
     }
 });

@@ -59,6 +59,12 @@ const MyStack = () => {
       </NavigationContainer>
       :
       <NavigationContainer>
+        <Stack.Screen
+
+          name="Ticket"
+          component={Map}
+
+        />
         <Stack.Navigator
           screenOptions={{
             headerShown: false
@@ -73,6 +79,8 @@ const MyStack = () => {
               paddingBottom: 3
             }
           }} >
+
+
           <Stack.Screen
 
             name="Home"

@@ -22,7 +22,9 @@ const MyEvents = ({ navigation }) => {
                 barStyle={isDarkMode ? 'light-content' : 'dark-content'}
                 backgroundColor={backgroundStyle.backgroundColor}
             />
-            <SectionListBasics />
+
+
+            <SectionListBasics navigation={navigation} />
         </SafeAreaView >
 
     );
