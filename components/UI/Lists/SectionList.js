@@ -7,6 +7,11 @@ import {
     StyleSheet, Pressable
 } from 'react-native';
 import { Dimensions } from "react-native";
+
+import Ticket from '../../../pages/Ticket'
+
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
+const Stack = createNativeStackNavigator();
 // var width = Dimensions.get('window').width; //full width
 // var height = Dimensions.get('window').height; //full height
 
@@ -15,8 +20,11 @@ const exampleEvents = [
     { title: 'January', data: [{ name: 'Event Name', date: "October 21st 2022", location: 'Poole' }, { name: 'Event Name', date: "October 21st 2022", location: 'Poole' }, { name: 'Event Name', date: "October 21st 2022", location: 'Poole' }, { name: 'Event Name', date: "October 21st 2022", location: 'Poole' }] },
 ]
 
-const SectionListBasics = () => {
+const SectionListBasics = (props) => {
     return (
+
+
+
         <View style={styles.container}>
             <SectionList
                 sections={exampleEvents}
@@ -44,7 +52,9 @@ const SectionListBasics = () => {
                             <View style={[{ flex: 1, flexDirection: 'row' }]}>
                                 <Pressable
                                     style={styles.button}
-                                    onPress={() => setModalEventsVisible(true)}
+                                    onPress={() => props.navigation.navigate('Ticket'
+                                    )
+                                    }
                                 >
                                     <Text style={{ color: 'white', alignSelf: 'center', fontSize: 20, }}>My Ticket</Text>
                                 </Pressable>
